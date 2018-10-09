@@ -11,7 +11,8 @@
     "react-draft-wysiwyg": "^1.12.13",
     "react-markdown-editor": "^0.6.2",
     "react-scripts": "2.0.3",
-    "simplemde": "^1.11.2"
+    "simplemde": "^1.11.2",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

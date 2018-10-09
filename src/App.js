@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import TextEditor from './Components/TextEditor'
 import MDE from './Components/MDEditor'
-
 import { monitorContent, unmonitorContent } from './Services/firebase.js';
+const uuidv1 = require('uuid/v1');
 
 class App extends Component {
 
@@ -27,29 +27,27 @@ class App extends Component {
       console.log(data);
       comp.setState({data: data});
     });
-    this.timerID = setInterval(
-     () => this.tick(),
-     1000
-   );
+   //  this.timerID = setInterval(
+   //   () => this.tick(),
+   //   1000
+   // );
   }
-
-  tick() {
-     this.setState({
-       date: new Date()
-     });
-   }
 
   render() {
 
     const { data } = this.state;
     var stories = "";
     var count  = 0;
-    console.log(data);
-    if(data !== null ){
 
+    if(data !== null ){
+      console.log(data);
+      data.push({key: uuidv1(), createRow: true})
       stories = data.map((data) => {
             count++;
             console.log(data);
+            if ( data.createRow === true) {
+              return <li><TextEditor contentKey={data.key} createRow={true} placeHolder="enter new item"/></li>
+            }
             return <li><TextEditor contentKey={data.key} data={data} /></li>
       });
     }
@@ -59,14 +57,11 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
             <div>
-
               <ol>
                 {stories}
-                <li><TextEditor key={Date()} placeHolder="enter new item"/></li>
               </ol>
               <br/><br/>
               <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-
             </div>
         </header>
       </div>

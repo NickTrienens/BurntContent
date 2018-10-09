@@ -9,11 +9,12 @@ export default class TextEditor extends React.Component {
     this.state = {
       data: props.data,
       contentKey: props.contentKey,
+      createRow: props.createRow
     }
   }
 
   render() {
-    const { data, contentKey } = this.state;
+    const { data, contentKey, createRow } = this.state;
     var text = "";
     if ( data !== null && data !== undefined ){
         text  = data.text;
@@ -22,6 +23,7 @@ export default class TextEditor extends React.Component {
                 text={text}
                 className="story-title"
                 contentKey={contentKey}
+                createRow={createRow}
                 submitCallback={ (text, success, failure) => {
 
                   success();

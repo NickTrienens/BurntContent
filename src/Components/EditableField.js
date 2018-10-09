@@ -14,7 +14,8 @@ export default class EditableField extends React.Component {
     placeholder: PropTypes.string,
     contentkey: PropTypes.string,
     fieldType: PropTypes.string,
-    submitCallback: PropTypes.func
+    submitCallback: PropTypes.func,
+    createRow: PropTypes.boolean
   }
 
   constructor(props) {
@@ -49,6 +50,7 @@ export default class EditableField extends React.Component {
       contentKey: props.contentKey,
       error: false,
       editingTimeout: editingTimeout,
+      createRow: this.props.createRow
 
     }
 
@@ -228,7 +230,7 @@ export default class EditableField extends React.Component {
       spinner = <span>...</span>
     }
 
-    if (this.state.editing) {
+    if (this.state.editing || this.state.createRow ) {
 
       textOrInput = <TextArea
                       autosize
@@ -247,9 +249,16 @@ export default class EditableField extends React.Component {
           colorMap[lastEditor] = randomColor();
         }
         var color = colorMap[lastEditor];
-        textOrInput = <div style={{ borderColor: color, backgroundColor: "#ccc" }} className="editing-container"><div style={{ color: color }} className="editor-name">{lastEditor}</div><div className="text-locked" id={this.state.contentkey}><span onClick={this.toggleEditing} >{this.state.text}</span></div></div>
+        textOrInput = <div style={{ borderColor: color, backgroundColor: "#cccccc" }} className="editing-container" >
+                        <div style={{ color: color }} className="editor-name">{lastEditor}</div>
+                        <div className="text-locked" id={this.state.contentkey}>
+                          <span onClick={this.toggleEditing} >{this.state.text}</span>
+                        </div>
+                      </div>
       } else {
-        textOrInput = <div onClick={this.toggleEditing} id={this.state.contentkey}><span className="text">{this.state.text}</span></div>
+        textOrInput = <div onClick={this.toggleEditing} id={this.state.contentkey} >
+                        <span className="text">{this.state.text}</span>
+                      </div>
       }
       //controlLinks = <a className="edit-link blue-link" onClick={this.toggleEditing} href="#">EDIT</a>
       editing = '';
