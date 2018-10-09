@@ -19,25 +19,20 @@ export const monitorContent = (newTodosCallback) => {
     .child("content")
     .on("value", snapshot => {
 
-      let lastEdit = null;
-      let lastText = null;
-      let lastEditor = "unknown";
+      var values = [];
       snapshot.forEach(function(childSnapshot) {
+        let lastEditor = "unknown";
+
           if (childSnapshot.event ===  "child_removed") {
               newTodosCallback({ locked: false });
               return
           }
           var childKey = childSnapshot.key;
           var childData = childSnapshot.val();
-          if (childKey === "text") {
-              lastText = childData
-          } else if (childKey === "lastEdit") {
-              lastEdit = childData
-          } else if (childKey === "username") {
-              lastEditor = childData
-          }
+
+          values.push({key: childKey, lastEdit: childData.lastEdit, text: childData.text, lastEditor: lastEditor })
       });
-      newTodosCallback({lastEdit: lastEdit, lastText: lastText, lastEditor: lastEditor });
+      newTodosCallback(values);
     });
 
     contentRef
