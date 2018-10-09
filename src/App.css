@@ -21,6 +21,17 @@
 .App-link {
   color: #61dafb;
 }
+.myLabelClass {
+  align-content: left;
+  text-align: left;
+}
+.myInputClass {
+  text-align: left;
+    font-size: calc(10px + 2vmin);
+}
+li { align-content: left;
+text-align: left;
+ }
 
 @keyframes App-logo-spin {
   from {
