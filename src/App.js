@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: null
+      data: null,
+      date: new Date()
     }
   }
 
@@ -21,23 +22,35 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const comp = this
     monitorContent( (data) => {
       console.log(data);
-      this.setState( data );
+      comp.setState({data: data});
     });
+    this.timerID = setInterval(
+     () => this.tick(),
+     1000
+   );
   }
+
+  tick() {
+     this.setState({
+       date: new Date()
+     });
+   }
 
   render() {
 
-    const {  data } = this.state;
+    const { data } = this.state;
     var stories = "";
     var count  = 0;
+    console.log(data);
     if(data !== null ){
-      console.log(data);
+
       stories = data.map((data) => {
             count++;
             console.log(data);
-            return <TextEditor contentKey={data.key} data={data} />
+            return <li><TextEditor contentKey={data.key} data={data} /></li>
       });
     }
 
@@ -46,10 +59,14 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
             <div>
-              <TextEditor key={Date()} />
+
               <ol>
                 {stories}
+                <li><TextEditor key={Date()} placeHolder="enter new item"/></li>
               </ol>
+              <br/><br/>
+              <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+
             </div>
         </header>
       </div>

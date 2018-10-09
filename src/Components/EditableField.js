@@ -247,7 +247,7 @@ export default class EditableField extends React.Component {
           colorMap[lastEditor] = randomColor();
         }
         var color = colorMap[lastEditor];
-        textOrInput = <div style={{ borderColor: color }} className="editing-container"><div style={{ color: color }} className="editor-name">{lastEditor}</div><div className="text-locked" id={this.state.contentkey}><span onClick={this.toggleEditing} >{this.state.text}</span></div></div>
+        textOrInput = <div style={{ borderColor: color, backgroundColor: "#ccc" }} className="editing-container"><div style={{ color: color }} className="editor-name">{lastEditor}</div><div className="text-locked" id={this.state.contentkey}><span onClick={this.toggleEditing} >{this.state.text}</span></div></div>
       } else {
         textOrInput = <div onClick={this.toggleEditing} id={this.state.contentkey}><span className="text">{this.state.text}</span></div>
       }

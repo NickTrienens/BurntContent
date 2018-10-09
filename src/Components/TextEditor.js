@@ -5,7 +5,7 @@ export default class TextEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props.data.text);
+
     this.state = {
       data: props.data,
       contentKey: props.contentKey,
@@ -15,7 +15,7 @@ export default class TextEditor extends React.Component {
   render() {
     const { data, contentKey } = this.state;
     var text = "";
-    if ( data !== null || data !== undefined ){
+    if ( data !== null && data !== undefined ){
         text  = data.text;
     }
     return <EditableField
