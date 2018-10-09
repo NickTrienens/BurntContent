@@ -13,6 +13,21 @@ export default class TextEditor extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.contentKey === nextProps.contentKey) {
+      let draftText = nextProps.text;
+      if(!draftText) {
+        draftText = "";
+      }
+      let defaultText =  nextProps.text;
+      if (!defaultText) {
+        defaultText = nextProps.placeholder;
+      }
+      console.log(nextProps);
+      this.setState({text: defaultText, draftText: draftText, data: nextProps.data, createRow: false});
+    }
+  }
+
   render() {
     const { data, contentKey, createRow } = this.state;
     var text = "";

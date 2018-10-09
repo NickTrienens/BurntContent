@@ -48,7 +48,7 @@ class App extends Component {
             if ( data.createRow === true) {
               return <li><TextEditor contentKey={data.key} createRow={true} placeHolder="enter new item"/></li>
             }
-            return <li><TextEditor contentKey={data.key} data={data} /></li>
+            return <li><TextEditor contentKey={data.key} data={data} createRow={false} /></li>
       });
     }
 
